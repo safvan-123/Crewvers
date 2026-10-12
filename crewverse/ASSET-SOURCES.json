@@ -1,0 +1,54 @@
+{
+  "license": "https://unsplash.com/license",
+  "note": "Illustrative stock photography. These are not photographs of Crewverse staff, clients or completed projects. Original Crewverse logo supplied by the client.",
+  "photos": [
+    {
+      "asset": "concert.webp",
+      "source": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=2000&q=90",
+      "pixels": [
+        2000,
+        1335
+      ]
+    },
+    {
+      "asset": "event.webp",
+      "source": "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=2000&q=90",
+      "pixels": [
+        2000,
+        1335
+      ]
+    },
+    {
+      "asset": "film.webp",
+      "source": "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=2000&q=90",
+      "pixels": [
+        2000,
+        1352
+      ]
+    },
+    {
+      "asset": "performer.webp",
+      "source": "https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=2000&q=90",
+      "pixels": [
+        2000,
+        1333
+      ]
+    },
+    {
+      "asset": "crew.webp",
+      "source": "https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=2000&q=90",
+      "pixels": [
+        2000,
+        1333
+      ]
+    },
+    {
+      "asset": "culture.webp",
+      "source": "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=2000&q=90",
+      "pixels": [
+        2000,
+        1335
+      ]
+    }
+  ]
+}
