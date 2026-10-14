@@ -1,14 +1,11 @@
-import type { Metadata } from "next";
+import {pageMetadata} from "../../lib/seo";
 import { Phone, Mail, ArrowUpRight } from "lucide-react";
-import { company } from "../../lib/content";
+import {getWebsite} from "../../lib/cms";
 import ContactForm from "../../components/ContactForm";
 import PageIntro from "../../components/PageIntro";
-export const metadata: Metadata = {
-  title: "Get a Crew",
-  description:
-    "Discuss your event or film production crew requirements with CREWVERSE. Call +91 9746071345 or email crewversegang@gmail.com.",
-};
-export default function Contact() {
+export const metadata = pageMetadata('Get a Crew in Kerala', 'Discuss your Kerala event or production crew requirements with CrewVerse. Request availability and a quote.', '/contact/');
+export default async function Contact() {
+  const {company, services} = await getWebsite();
   return (
     <>
       <PageIntro
@@ -63,7 +60,7 @@ export default function Contact() {
             </p>
           </div>
         </div>
-        <ContactForm />
+        <ContactForm company={company} services={services}/>
       </section>
     </>
   );

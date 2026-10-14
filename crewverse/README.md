@@ -1,3 +1,9 @@
+# Current updated project
+
+See **../SETUP.md** for the current Sanity, policy and deployment instructions.
+The original project notes below are retained for background; the current setup
+and verification documents take precedence.
+
 # CREWVERSE — Next.js Frontend
 
 A four-page, responsive, cinematic website for CREWVERSE event staffing, entertainment and film workforce solutions. Company content comes from the supplied profile and development brief. No backend, database, authentication, API endpoint, CMS or admin dashboard is included.

@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { company, services } from "../lib/content";
-export default function Footer() {
+import {getWebsite} from "../lib/cms";
+export default async function Footer() {
+  const {company, services} = await getWebsite();
   return (
     <>
       <footer className="footer">
@@ -29,6 +30,7 @@ export default function Footer() {
               ["/", "Home"],
               ["/about", "About Us"],
               ["/services", "Services"],
+              ["/events", "Events"],
               ["/contact", "Get a Crew"],
             ].map(([h, t]) => (
               <Link href={h} key={h}>
@@ -58,6 +60,12 @@ export default function Footer() {
             </p>
           </div>
         </div>
+        <nav className="container policy-links" aria-label="Booking policies">
+          <Link href="/terms">Terms &amp; Conditions</Link>
+          <Link href="/payment-policy">Payment Policy</Link>
+          <Link href="/cancellation-refund-policy">Cancellation &amp; Refund Policy</Link>
+          <Link href="/safety-liability-policy">Safety &amp; Liability Policy</Link>
+        </nav>
         <div className="container footer-bottom">
           <span>
             © {new Date().getFullYear()} CREWVERSE. All rights reserved.

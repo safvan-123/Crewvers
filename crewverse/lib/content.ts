@@ -43,6 +43,8 @@ export const services = [
       "Dancers",
       "Rappers",
       "DJs",
+      "Music Band",
+      "Kerala Fusion / Traditional Arts",
       "Emcees",
       "Magicians",
       "Mentalists",

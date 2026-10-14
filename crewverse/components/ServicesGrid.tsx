@@ -1,55 +1,32 @@
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-import { services } from "../lib/content";
+import {ArrowUpRight, Mic, Camera, Users, Martini, Megaphone, AudioLines, ShieldCheck, Sparkles, Clapperboard, HardHat} from "lucide-react";
 import Reveal from "./Reveal";
-import SectionHeading from "./SectionHeading";
-export default function ServicesGrid() {
-  return (
-    <section className="section service-section">
-      <div className="container">
-        <SectionHeading
-          eyebrow="WHAT WE DO"
-          text="The right people. The right expertise. All the support your event or production needs."
-        >
-          THE RIGHT TALENT.
-          <br />
-          <span>FOR EVERY PRODUCTION.</span>
-        </SectionHeading>
-        <div className="services-grid">
-          {services.map((s, i) => (
-            <Reveal key={s.id} delay={(i % 2) * 0.06}>
-              <Link href={`/services/#${s.id}`} className="service-card">
-                <Image
-                  src={s.image}
-                  alt={s.alt}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-                <div className="service-gradient" />
-                <div className="service-card-top">
-                  <span>{s.number} / CREWVERSE</span>
-                  <span className="circle-arrow">
-                    <ArrowUpRight size={22} />
-                  </span>
-                </div>
-                <div className="service-card-copy">
-                  <h3>{s.title}</h3>
-                  <p>{s.short}</p>
-                  <span className="service-discover">
-                    Explore the crew <ArrowUpRight size={15} />
-                  </span>
-                </div>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
-        <div className="center-link">
-          <Link href="/services" className="button outline">
-            View All Services <ArrowUpRight size={18} />
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
+import SiteImage from "./SiteImage";
+import {getWebsite} from "../lib/cms";
+const categories = [
+  {title:"Singers, Rappers & Dancers", id:"entertainment", image:"performer", Icon:Mic},
+  {title:"Photography & Videography", id:"entertainment", image:"film", Icon:Camera},
+  {title:"Event Support Staff", id:"event-staffing", image:"event", Icon:Users},
+  {title:"Bartenders & Food Service", id:"event-staffing", image:"event", Icon:Martini},
+  {title:"Promoters & Brand Activations", id:"event-staffing", image:"crew", Icon:Megaphone},
+  {title:"Emcees & Hostesses", id:"entertainment", image:"crew", Icon:AudioLines},
+  {title:"Bouncers & Security", id:"event-staffing", image:"event", Icon:ShieldCheck},
+  {title:"Cultural Artists", id:"culture-workforce", image:"culture", Icon:Sparkles},
+  {title:"Film & Production Crew", id:"film-production", image:"film", Icon:Clapperboard},
+  {title:"Skilled Labour & Setup", id:"culture-workforce", image:"event", Icon:HardHat},
+];
+export default async function ServicesGrid() {
+  const {services} = await getWebsite();
+  const entertainment = services.find(s => s.id === "entertainment")!;
+  return <section id="services-preview" className="section service-section compact-services"><div className="container">
+    <div className="section-heading"><div><p className="eyebrow">OUR SERVICES</p><h2>Complete Crew Solutions</h2><p className="compact-intro">The right people for your event, performance or production.</p></div><Link href="/services" className="text-link">View All Services <ArrowUpRight size={17}/></Link></div>
+    <div className="reference-services-grid">{categories.map(({title,id,image,Icon},i) => {
+      const group = services.find(s => s.id === id)!;
+      return <Reveal key={title} delay={(i % 5)*0.025}><Link href={`/services/#${id}`} className="reference-service-card">
+        <SiteImage image={`/images/${image}.webp`} alt={group.alt} sizes="(max-width: 480px) 100vw, (max-width: 900px) 50vw, 240px"/>
+        <div className="reference-service-copy"><Icon size={25}/><h3>{title}</h3><p>{group.short}</p><ArrowUpRight className="card-corner" size={16}/></div>
+      </Link></Reveal>;
+    })}</div>
+    <p className="entertainment-note">Entertainment options include {entertainment.roles.join(" · ")}</p>
+  </div></section>;
 }

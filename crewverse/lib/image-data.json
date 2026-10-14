@@ -1,0 +1,37 @@
+{
+  "/images/crew.webp": {
+    "width": 2000,
+    "height": 1333,
+    "sources": "/images/crew--480.webp 480w, /images/crew--960.webp 960w, /images/crew--1600.webp 1600w, /images/crew--2000.webp 2000w"
+  },
+  "/images/performer.webp": {
+    "width": 2000,
+    "height": 1333,
+    "sources": "/images/performer--480.webp 480w, /images/performer--960.webp 960w, /images/performer--1600.webp 1600w, /images/performer--2000.webp 2000w"
+  },
+  "/images/concert-4k.webp": {
+    "width": 3840,
+    "height": 2563,
+    "sources": "/images/concert-4k--480.webp 480w, /images/concert-4k--960.webp 960w, /images/concert-4k--1600.webp 1600w, /images/concert-4k--3840.webp 3840w"
+  },
+  "/images/concert.webp": {
+    "width": 2000,
+    "height": 1335,
+    "sources": "/images/concert--480.webp 480w, /images/concert--960.webp 960w, /images/concert--1600.webp 1600w, /images/concert--2000.webp 2000w"
+  },
+  "/images/film.webp": {
+    "width": 2000,
+    "height": 1352,
+    "sources": "/images/film--480.webp 480w, /images/film--960.webp 960w, /images/film--1600.webp 1600w, /images/film--2000.webp 2000w"
+  },
+  "/images/culture.webp": {
+    "width": 2000,
+    "height": 1335,
+    "sources": "/images/culture--480.webp 480w, /images/culture--960.webp 960w, /images/culture--1600.webp 1600w, /images/culture--2000.webp 2000w"
+  },
+  "/images/event.webp": {
+    "width": 2000,
+    "height": 1335,
+    "sources": "/images/event--480.webp 480w, /images/event--960.webp 960w, /images/event--1600.webp 1600w, /images/event--2000.webp 2000w"
+  }
+}

@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+import {pageMetadata} from "../../lib/seo";
+import {getWebsite} from "../../lib/cms";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
@@ -6,12 +7,9 @@ import PageIntro from "../../components/PageIntro";
 import CTASection from "../../components/CTASection";
 import WhyChooseUs from "../../components/WhyChooseUs";
 import Reveal from "../../components/Reveal";
-export const metadata: Metadata = {
-  title: "About Us",
-  description:
-    "Meet CREWVERSE, a next-generation event staffing, entertainment and film workforce solutions company. Discover our purpose, vision and mission.",
-};
-export default function About() {
+export const metadata = pageMetadata('About Us', 'Meet CrewVerse, connecting Kerala events, businesses and film productions with performers and event support crews.', '/about/');
+export default async function About() {
+  const {aboutIntroduction} = await getWebsite();
   return (
     <>
       <PageIntro
@@ -58,10 +56,7 @@ export default function About() {
         </Reveal>
         <Reveal>
           <p>
-            CREWVERSE is a next-generation event staffing, entertainment and
-            manpower solutions company. Our work brings together professionals
-            across hospitality, entertainment, film production and skilled
-            operational support.
+            {aboutIntroduction}
           </p>
           <p>
             We simplify the way event and movie organizers find, manage and

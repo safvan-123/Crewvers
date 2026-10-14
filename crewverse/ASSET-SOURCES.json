@@ -1,6 +1,6 @@
 {
   "license": "https://unsplash.com/license",
-  "note": "Illustrative stock photography. These are not photographs of Crewverse staff, clients or completed projects. Original Crewverse logo supplied by the client.",
+  "note": "Illustrative stock photography. These are not photographs of Crewverse staff, clients or completed projects. Original Crewverse logo supplied by the client. Responsive derivatives are compressed from the listed originals without upscaling.",
   "photos": [
     {
       "asset": "concert.webp",
@@ -48,6 +48,14 @@
       "pixels": [
         2000,
         1335
+      ]
+    },
+    {
+      "asset": "concert-4k.webp",
+      "source": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=max&w=3840&q=90",
+      "pixels": [
+        3840,
+        2563
       ]
     }
   ]

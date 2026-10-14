@@ -1,17 +1,14 @@
-import type { Metadata } from "next";
+import {pageMetadata} from "../../lib/seo";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Plus, Check } from "lucide-react";
-import { services } from "../../lib/content";
+import {getWebsite} from "../../lib/cms";
 import PageIntro from "../../components/PageIntro";
 import CTASection from "../../components/CTASection";
 import Reveal from "../../components/Reveal";
-export const metadata: Metadata = {
-  title: "Our Services",
-  description:
-    "Explore Crewverse event staffing, performers, film production manpower, cultural artists and skilled workforce roles.",
-};
-export default function Services() {
+export const metadata = pageMetadata('Crew Services in Kerala', 'Explore event staffing, Music Bands, Kerala fusion and traditional arts, cultural artists and film production workforce services.', '/services/');
+export default async function Services() {
+  const {services} = await getWebsite();
   return (
     <>
       <PageIntro

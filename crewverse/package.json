@@ -4,7 +4,7 @@
   "description": "Crewverse event and film workforce frontend",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/clean-export.mjs && next build",
     "test": "node --test tests/*.test.mjs",
     "typecheck": "tsc --noEmit"
   },

@@ -8,6 +8,7 @@ const links = [
   ["/", "Home"],
   ["/about", "About Us"],
   ["/services", "Services"],
+  ["/events", "Events"],
   ["/contact", "Contact"],
 ];
 export default function Header() {

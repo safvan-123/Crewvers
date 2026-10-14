@@ -4,28 +4,19 @@ import ServicesGrid from "../components/ServicesGrid";
 import WhyChooseUs from "../components/WhyChooseUs";
 import IndustriesSection from "../components/IndustriesSection";
 import ProcessSection from "../components/ProcessSection";
-import CTASection from "../components/CTASection";
-import { ArrowUpRight } from "lucide-react";
+import EventsPreview from "../components/EventsPreview";
+import HomeContact from "../components/HomeContact";
+import {pageMetadata} from "../lib/seo";
+export const metadata = pageMetadata("Event Staff & Entertainment in Kerala", "Find event staff, performers, Music Bands, Kerala traditional artists and film production crews with CrewVerse. Enquire about your Kerala event.", "/");
 export default function Home() {
-  return (
-    <>
-      <HeroSection />
-      <div className="statement-strip">
-        <div className="container">
-          <span>RIGHT CREW</span>
-          <ArrowUpRight />
-          <span>RIGHT EVENTS</span>
-          <ArrowUpRight />
-          <span>RIGHT TIME</span>
-          <ArrowUpRight />
-        </div>
-      </div>
-      <AboutPreview />
-      <ServicesGrid />
-      <WhyChooseUs />
-      <IndustriesSection />
-      <ProcessSection />
-      <CTASection />
-    </>
-  );
+  return <div className="reference-home">
+    <HeroSection />
+    <ServicesGrid />
+    <AboutPreview />
+    <EventsPreview />
+    <WhyChooseUs />
+    <IndustriesSection />
+    <ProcessSection />
+    <HomeContact />
+  </div>;
 }

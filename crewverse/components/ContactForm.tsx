@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Mail, MessageCircle, Check } from "lucide-react";
-import { company, services } from "../lib/content";
+import { company as defaultCompany, services as defaultServices } from "../lib/content";
+import Link from "next/link";
 import {
   localDate,
   validateEnquiry,
@@ -17,7 +18,7 @@ const initial = {
   location: "",
   requirements: "",
 };
-export default function ContactForm() {
+export default function ContactForm({company = defaultCompany, services = defaultServices}: {company?: typeof defaultCompany; services?: typeof defaultServices}) {
   const [data, setData] = useState(initial),
     [errors, setErrors] = useState<Record<string, string>>({}),
     [draft, setDraft] = useState(""),
@@ -31,7 +32,7 @@ export default function ContactForm() {
     const id = new URLSearchParams(window.location.search).get("service");
     const service = services.find((s) => s.id === id);
     if (service) setData((d) => ({ ...d, service: service.title }));
-  }, []);
+  }, [services]);
   function change(
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -139,6 +140,7 @@ export default function ContactForm() {
             {services.map((s) => (
               <option key={s.id}>{s.title}</option>
             ))}
+            <optgroup label="Entertainment Roles">{services.find((s) => s.id === "entertainment")?.roles.map((role) => <option key={role}>{role}</option>)}</optgroup>
             <option>Multiple services / Help me choose</option>
           </select>
           {errors.service && (
@@ -197,6 +199,7 @@ export default function ContactForm() {
         {channel === "whatsapp" ? "WhatsApp" : "email"} app to send it. This
         website does not save your details or confirm a booking.
       </p>
+      <p className="enquiry-policy-links">Before confirming a booking, review our <Link href="/terms">Terms</Link>, <Link href="/payment-policy">Payment Policy</Link> and <Link href="/cancellation-refund-policy">Cancellation Policy</Link>.</p>
       {draft && (
         <div className="enquiry-result" aria-live="polite">
           <p>
