@@ -2400,3 +2400,49 @@ button {
  .event-detail-cover { aspect-ratio: 1.25; }
  .policy-links { gap: 8px 16px; }
 }
+
+/* Motion enhancements. No resting geometry, typography or color changes. */
+:root { --motion-ease: cubic-bezier(.22,1,.36,1); }
+/* Add clearance to the original scroll-padding beneath the fixed header. */
+:where(section[id], form[id]) { scroll-margin-top: 20px; }
+.main-nav > a:not(.button)::after { transition: width .28s var(--motion-ease); }
+.main-nav:has(.nav-indicator) > a:not(.button)::after { opacity: 0; }
+.nav-indicator { position: absolute; left: 0; right: 0; bottom: 3px; height: 2px; background: var(--yellow); pointer-events: none; }
+.main-nav > a { transition: color .25s; }
+.button svg, .text-link svg, .card-corner, .contact-channel > svg:last-child { transition: transform .3s var(--motion-ease); }
+.button:focus-visible svg, .text-link:focus-visible svg { transform: translate(2px,-2px); }
+.reference-service-card { transition: transform .35s var(--motion-ease), border-color .35s, box-shadow .35s; }
+.reference-service-card > img { transition: transform .65s var(--motion-ease); }
+.reference-service-card:focus-visible { border-color: var(--yellow); box-shadow: 0 8px 20px #0003; }
+.reference-service-card:focus-visible .card-corner { transform: translate(2px,-2px); }
+.reference-service-card:active, .button:active { transform: scale(.99); }
+.about-photo { overflow: hidden; }
+.event-card { transition: border-color .3s; }
+.event-card:focus-within { border-color: var(--yellow); }
+.event-cover:focus-visible img { transform: scale(1.035); }
+.field input, .field textarea, .field select { transition: border-color .25s, background-color .25s, box-shadow .25s; }
+.roles-accordion[open] ul { animation: menu-in .25s var(--motion-ease); }
+.step-number { transition: filter .4s; }
+.process-step[data-step-active] .step-number { filter: brightness(1.12); }
+.step-rule::after { content: ""; position: absolute; inset: 0; background: var(--yellow); transform-origin: left; transform: scaleX(var(--step-progress,0)); transition: transform .3s linear; }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+ .reference-service-card:hover { transform: translateY(-4px) scale(1.015); box-shadow: 0 8px 20px #0003; }
+ .reference-service-card:hover > img { transform: scale(1.04); }
+ .reference-service-card:hover .card-corner, .button:hover svg, .text-link:hover svg, .contact-channel:hover > svg:last-child { transform: translate(2px,-2px); }
+ .event-card:hover { border-color: var(--yellow); }
+ [data-magnetic] { translate: var(--magnetic-x,0px) var(--magnetic-y,0px); transition: translate .25s var(--motion-ease), background .2s, color .2s, transform .2s; }
+}
+@media (max-width: 768px) {
+ .main-nav, .main-nav.is-open { display: flex; animation: none; transition: opacity .22s var(--motion-ease), transform .22s var(--motion-ease), visibility .22s; }
+ .main-nav { opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-8px); }
+ .main-nav.is-open { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0); }
+ .nav-indicator { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+ .reference-service-card, .reference-service-card:hover, .button:hover, .button:active,
+ .event-cover:hover img, .event-cover:focus-visible img, .service-card:hover > img,
+ .process-step[data-step-active] .step-number, .button:focus-visible svg, .text-link:focus-visible svg { transform: none; }
+ [data-magnetic] { translate: none; }
+ .main-nav, .main-nav.is-open { transform: none; }
+ .step-rule::after { display: none; }
+}

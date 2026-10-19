@@ -1,4 +1,5 @@
 import Image from "next/image";
+import CrewLink from "./CrewLink";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import {getWebsite} from "../lib/cms";
@@ -33,9 +34,7 @@ export default async function Footer() {
               ["/events", "Events"],
               ["/contact", "Get a Crew"],
             ].map(([h, t]) => (
-              <Link href={h} key={h}>
-                {t}
-              </Link>
+              t === "Get a Crew" ? <CrewLink key={h}>{t}</CrewLink> : <Link href={h} key={h}>{t}</Link>
             ))}
           </div>
           <div>
@@ -73,9 +72,9 @@ export default async function Footer() {
           <span>Events. Entertainment. Film.</span>
         </div>
       </footer>
-      <Link href="/contact" className="mobile-booking">
+      <CrewLink className="mobile-booking">
         GET A CREW <ArrowUpRight size={18} />
-      </Link>
+      </CrewLink>
     </>
   );
 }

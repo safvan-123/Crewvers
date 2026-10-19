@@ -5,7 +5,7 @@ import Link from "next/link";
 import Reveal from "./Reveal";
 export default function IndustriesSection() {
   return (
-    <section className="industries-section">
+    <section id="industries" className="industries-section">
       <div className="container industries-layout">
         <Reveal>
           <p className="eyebrow">

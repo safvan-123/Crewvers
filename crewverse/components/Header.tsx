@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import {motion, useReducedMotion} from "motion/react";
+import CrewLink from "./CrewLink";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 const links = [
   ["/", "Home"],
@@ -15,6 +17,10 @@ export default function Header() {
   const path = usePathname().replace(/\/$/, "") || "/";
   const [open, setOpen] = useState(false),
     [scrolled, setScrolled] = useState(false);
+  const reduced = useReducedMotion();
+  const [hovered, setHovered] = useState<string | null>(null);
+  const [contactActive, setContactActive] = useState(false);
+  const active = path === "/" && contactActive ? "/contact" : path.startsWith("/events/") ? "/events" : path;
   const trigger = useRef<HTMLButtonElement>(null);
   useEffect(() => {
     const update = () => setScrolled(window.scrollY > 20);
@@ -22,6 +28,15 @@ export default function Header() {
     window.addEventListener("scroll", update, { passive: true });
     return () => window.removeEventListener("scroll", update);
   }, []);
+  useEffect(() => {
+    if (path !== "/") return;
+    const contact = document.getElementById("contact");
+    if (!contact) return;
+    const observer = new IntersectionObserver(([entry]) => setContactActive(entry.isIntersecting), {rootMargin: "-82px 0px -25% 0px"});
+    observer.observe(contact);
+    return () => observer.disconnect();
+  }, [path]);
+  useEffect(() => {setOpen(false); setHovered(null);}, [path]);
   useEffect(() => {
     const key = (e: KeyboardEvent) => {
       if (e.key === "Escape" && open) {
@@ -54,28 +69,32 @@ export default function Header() {
           className={`main-nav ${open ? "is-open" : ""}`}
           aria-label="Main navigation"
           id="main-nav"
+          onMouseLeave={() => setHovered(null)}
+          onBlur={(event) => {if (!event.currentTarget.contains(event.relatedTarget)) setHovered(null);}}
         >
           {links.map(([href, label]) => (
             <Link
               key={href}
-              href={href}
-              aria-current={path === href ? "page" : undefined}
+              href={href === "/contact" && path === "/" ? "#contact" : href === "/" ? "/" : `${href}/`}
+              aria-current={active === href ? (path === "/" && href === "/contact" ? "location" : "page") : undefined}
+              onMouseEnter={() => setHovered(href)}
+              onFocus={() => setHovered(href)}
               onClick={() => setOpen(false)}
             >
               {label}
+              {(hovered || active) === href && <motion.span className="nav-indicator" layoutId="navbar-indicator" initial={false} transition={reduced ? {duration: 0} : {type: "tween", duration: .28, ease: [.22, 1, .36, 1]}} />}
             </Link>
           ))}
-          <Link
-            href="/contact"
+          <CrewLink
             className="button yellow mobile-menu-cta"
             onClick={() => setOpen(false)}
           >
             Get a Crew <ArrowUpRight size={17} />
-          </Link>
+          </CrewLink>
         </nav>
-        <Link href="/contact" className="button yellow header-cta">
+        <CrewLink className="button yellow header-cta">
           Get a Crew <ArrowUpRight size={17} />
-        </Link>
+        </CrewLink>
         <button
           ref={trigger}
           className="menu-trigger"

@@ -23,7 +23,7 @@ const icons = [
 ];
 export default function WhyChooseUs() {
   return (
-    <section className="section container">
+    <section id="why-crewverse" className="section container">
       <SectionHeading
         eyebrow="WHY CREWVERSE"
         text="Fewer moving parts. A clearer conversation. A staffing partner built around your requirements."
@@ -36,7 +36,7 @@ export default function WhyChooseUs() {
         {advantages.map((a, i) => {
           const Icon = icons[i];
           return (
-            <Reveal className="advantage" key={a.title}>
+            <Reveal className="advantage" delay={(i % 4) * 0.06} key={a.title}>
               <div className="advantage-top">
                 <Icon size={24} strokeWidth={1.4} />
                 <span>0{i + 1}</span>

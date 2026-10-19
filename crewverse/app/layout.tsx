@@ -2,6 +2,7 @@ import type {Metadata} from "next";
 import "@fontsource-variable/inter";
 import "@fontsource-variable/space-grotesk";
 import "./globals.css";
+import AnimationController from "../components/AnimationController";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import {getWebsite} from "../lib/cms";
@@ -22,5 +23,5 @@ export default async function RootLayout({children}: Readonly<{children:React.Re
  };
  return <html lang="en-IN"><body><a href="#main" className="skip-link">Skip to content</a>
  <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(schema).replace(/</g,"\\u003c")}}/>
- <Header/><main id="main">{children}</main><Footer/></body></html>;
+ <AnimationController/><Header/><main id="main">{children}</main><Footer/></body></html>;
 }
