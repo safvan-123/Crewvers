@@ -2475,3 +2475,20 @@ button {
  .reference-service-card:active > img, .event-cover:active img, .menu-trigger:active,
  .reference-service-card:active .card-corner, .button:active svg, .text-link:active svg { transform: none; }
 }
+
+/* Size the animated underline to the menu text. */
+.main-nav .nav-label {
+  display: inline-block;
+  position: relative;
+}
+
+.main-nav .nav-label > .nav-indicator {
+  bottom: -9px;
+}
+
+/* Hide full-row divider lines while preserving mobile tap-target sizes. */
+@media (max-width: 768px) {
+  .main-nav > a:not(.button) {
+    border-bottom-color: transparent;
+  }
+}
