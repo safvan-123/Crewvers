@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import Reveal from "./Reveal";
+
 export default function PageIntro({
   eyebrow,
   title,
@@ -11,14 +11,16 @@ export default function PageIntro({
 }) {
   return (
     <section className="page-intro container">
-      <Reveal>
+      <div className="page-intro-content">
         <p className="eyebrow">
           <span />
           {eyebrow}
         </p>
+
         <h1>{title}</h1>
+
         <p className="intro-description">{description}</p>
-      </Reveal>
+      </div>
     </section>
   );
 }

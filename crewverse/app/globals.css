@@ -2492,3 +2492,200 @@ button {
     border-bottom-color: transparent;
   }
 }
+
+/* Smaller headings on mobile only. */
+@media (max-width: 768px) {
+  #main:has(
+    .about-banner,
+    .service-detail-list,
+    .events-page,
+    .contact-layout
+  ) .page-intro h1 {
+    font-size: clamp(35px, 5vw, 39px);
+  }
+
+  .service-detail-copy h2,
+  .contact-sidebar h2 {
+    font-size: 35px;
+  }
+
+  .about-banner h2 {
+    font-size: 48px;
+  }
+
+  .story-grid h2,
+  .problem-grid h2,
+  .vision-grid h2 {
+    font-size: 36px;
+  }
+
+  .solution-panel h3 {
+    font-size: 25px;
+  }
+
+  #main > .section > .section-heading h2,
+  .events-page .empty-events h2 {
+    font-size: clamp(27px, 3.5vw, 31px);
+  }
+
+  .events-page .event-card h3 {
+    font-size: 21px;
+  }
+
+  .event-detail-page h1 {
+    font-size: clamp(29px, 4vw, 33px);
+  }
+
+  .cta-section h2 {
+    font-size: clamp(30px, 4vw, 35px);
+  }
+}
+
+/* Smaller phones. */
+@media (max-width: 640px) {
+  #main:has(
+    .about-banner,
+    .service-detail-list,
+    .events-page,
+    .contact-layout
+  ) .page-intro h1 {
+    font-size: clamp(29px, 7.5vw, 35px);
+  }
+
+  .service-detail-copy h2 {
+    font-size: 28px;
+  }
+
+  .about-banner h2 {
+    font-size: 36px;
+  }
+
+  .story-grid h2,
+  .problem-grid h2,
+  .vision-grid h2,
+  .contact-sidebar h2 {
+    font-size: 29px;
+  }
+
+  #main > .section > .section-heading h2,
+  .events-page .empty-events h2 {
+    font-size: clamp(26px, 6.8vw, 32px);
+  }
+
+  .contact-layout .form-heading h2 {
+    font-size: 24px;
+  }
+
+  .cta-section h2 {
+    font-size: clamp(28px, 7.2vw, 36px);
+  }
+}
+
+
+/* Coordinated page entrance without changing font sizes or layout. */
+@keyframes crew-page-intro {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.page-intro-content > .eyebrow {
+  animation:
+    crew-page-intro
+    420ms
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+}
+
+.page-intro-content > h1 {
+  animation:
+    crew-page-intro
+    600ms
+    cubic-bezier(0.22, 1, 0.36, 1)
+    60ms
+    both;
+}
+
+.page-intro-content > .intro-description {
+  animation:
+    crew-page-intro
+    550ms
+    cubic-bezier(0.22, 1, 0.36, 1)
+    140ms
+    both;
+}
+
+/* Respect device accessibility preferences. */
+@media (prefers-reduced-motion: reduce) {
+  .page-intro-content > .eyebrow,
+  .page-intro-content > h1,
+  .page-intro-content > .intro-description {
+    animation: none;
+  }
+}
+
+/* Refined page entrance: no font-size or layout changes. */
+@keyframes crew-eyebrow-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes crew-heading-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes crew-description-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.page-intro-content > .eyebrow {
+  animation:
+    crew-eyebrow-enter 450ms
+    cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.page-intro-content > h1 {
+  animation:
+    crew-heading-enter 760ms
+    cubic-bezier(0.16, 1, 0.3, 1) 70ms both;
+}
+
+.page-intro-content > .intro-description {
+  animation:
+    crew-description-enter 620ms
+    cubic-bezier(0.16, 1, 0.3, 1) 180ms both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-intro-content > .eyebrow,
+  .page-intro-content > h1,
+  .page-intro-content > .intro-description {
+    animation: none;
+  }
+}

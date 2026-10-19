@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
+import { scrollPageToTop } from "./AnimationController";
 import CrewLink from "./CrewLink";
 
 const links = [
@@ -106,56 +107,61 @@ export default function Header() {
             }
           }}
         >
-          {links.map(([href, label]) => (
-            <Link
-              key={href}
-              href={
-                href === "/contact" && path === "/"
-                  ? "#contact"
-                  : href === "/"
-                    ? "/"
-                    : `${href}/`
-              }
-              aria-current={
-                active === href
-                  ? path === "/" && href === "/contact"
-                    ? "location"
-                    : "page"
-                  : undefined
-              }
-              onPointerEnter={(event) => {
-                if (event.pointerType === "mouse") {
-                  setHovered(href);
-                }
-              }}
-              onFocus={() => setHovered(href)}
-              onClick={() => {
-                setOpen(false);
-                setHovered(null);
-              }}
-            >
-              <span className="nav-label">
-                {label}
+     {links.map(([href, label]) => (
+  <Link
+    key={href}
+    scroll={href === "/contact" && path === "/"}
+    href={
+      href === "/contact" && path === "/"
+        ? "#contact"
+        : href === "/"
+          ? "/"
+          : `${href}/`
+    }
+    aria-current={
+      active === href
+        ? path === "/" && href === "/contact"
+          ? "location"
+          : "page"
+        : undefined
+    }
+    onPointerEnter={(event) => {
+      if (event.pointerType === "mouse") {
+        setHovered(href);
+      }
+    }}
+    onFocus={() => setHovered(href)}
+    onClick={() => {
+      setOpen(false);
+      setHovered(null);
 
-                {(hovered || active) === href && (
-                  <motion.span
-                    className="nav-indicator"
-                    layoutId="navbar-indicator"
-                    initial={false}
-                    transition={
-                      reduced
-                        ? { duration: 0 }
-                        : {
-                            type: "tween",
-                            duration: 0.28,
-                            ease: [0.22, 1, 0.36, 1],
-                          }
-                    }
-                  />
-                )}
-              </span>
-            </Link>
-          ))}
+      if (href === path) {
+        scrollPageToTop();
+      }
+    }}
+  >
+    <span className="nav-label">
+      {label}
+
+      {(hovered || active) === href && (
+        <motion.span
+          className="nav-indicator"
+          layoutId="navbar-indicator"
+          initial={false}
+          transition={
+            reduced
+              ? { duration: 0 }
+              : {
+                  type: "tween",
+                  duration: 0.28,
+                  ease: [0.22, 1, 0.36, 1],
+                }
+          }
+        />
+      )}
+    </span>
+  </Link>
+))}
 
           <CrewLink
             className="button yellow mobile-menu-cta"

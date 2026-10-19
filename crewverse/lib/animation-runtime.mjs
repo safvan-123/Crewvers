@@ -161,7 +161,6 @@ export function startAnimations(main, scope = document, env = window) {
     preference.addListener(stop); cleanup.push(() => preference.removeListener(stop));
   }
   listen(env, 'pageshow', scheduleScan);
-  play(main, [{opacity: .72}, {opacity: 1}], 320);
   scheduleScan();
   return () => {
     disposed = true;
