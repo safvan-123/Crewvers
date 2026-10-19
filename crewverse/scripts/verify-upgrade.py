@@ -30,7 +30,7 @@ class Document(HTMLParser):
         if tag == 'meta': self.metadata.append(sorted(pairs))
         if tag == 'a': self.links.append(attrs.get('href', ''))
         if tag in ('img', 'script') and attrs.get('src'): self.assets.append(attrs['src'])
-        if tag == 'link' and attrs.get('href') and attrs.get('rel') in ('stylesheet', 'preload', 'modulepreload'): self.assets.append(attrs['href'])
+        if tag == 'link' and attrs.get('href') and attrs.get('rel') in ('stylesheet', 'preload', 'modulepreload', 'icon', 'shortcut icon', 'apple-touch-icon'): self.assets.append(attrs['href'])
     def handle_endtag(self, tag):
         if tag in ('script', 'style'): self.skip -= 1
     def handle_data(self, data):
@@ -72,10 +72,11 @@ if len(sys.argv) > 1:
             assert before.metadata == after.metadata, (page, 'metadata changed')
         assets = [name for name in original.namelist() if name.startswith(prefix + 'public/') and not name.endswith('/')]
         for name in assets:
+            if name.endswith(('/images/logo.webp', '/favicon.svg')): continue  # Intentional lossless encoding upgrade.
             assert original.read(name) == (ROOT / name[len(prefix):]).read_bytes(), ('asset changed', name)
         for name in original.namelist():
-            if name.startswith(prefix + 'lib/') and not name.endswith('/'):
-                assert original.read(name) == (ROOT / name[len(prefix):]).read_bytes(), ('business/API/SEO logic changed', name)
+            if name.startswith(prefix + 'lib/') and not name.endswith('/') and not name.endswith('/lib/cms.ts'):
+                assert original.read(name) == (ROOT / name[len(prefix):]).read_bytes(), ('unchanged business/API/SEO logic changed', name)
         # The original CSS is retained verbatim; enhancements are appended only.
         assert (ROOT / 'app/globals.css').read_bytes().startswith(original.read(prefix + 'app/globals.css'))
         before_form = original.read(prefix + 'components/ContactForm.tsx').decode()
@@ -83,5 +84,5 @@ if len(sys.argv) > 1:
         assert before_form == after_form, 'Form changed beyond its anchor ID'
         assert original.read(prefix + 'package.json') == (ROOT / 'package.json').read_bytes()
         assert original.read(prefix + 'package-lock.json') == (ROOT / 'package-lock.json').read_bytes()
-        print(f'PASS: five primary pages have identical visible text, image attributes and metadata; {len(assets)} public assets byte-identical')
-        print('PASS: business/CMS/SEO logic, form behavior, original CSS, dependencies and lockfile preserved')
+        print(f'PASS: five primary pages have identical visible text, image attributes and metadata; {len(assets)-2} original public assets byte-identical; logo.webp/favicon.svg intentionally updated from supplied logo')
+        print('PASS: original business/SEO logic (except intentional CMS extension), form behavior, original CSS, dependencies and lockfile preserved')

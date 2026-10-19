@@ -1,4 +1,6 @@
 import { cache } from "react";
+import defaultPreviews from "./service-previews.json";
+import {mergeServices, mergeServicePreviews} from "./service-content.mjs";
 import { company as defaults, services as defaultServices } from "./content";
 import { fetchPublished, filterPublishedEvents } from "./cms-core.mjs";
 
@@ -14,12 +16,12 @@ const read = (query: string) => fetchPublished(query, {
   dataset: process.env.SANITY_DATASET || "production",
 });
 type WebsiteContent = {
-  company: typeof defaults; services: typeof defaultServices;
+  company: typeof defaults; services: typeof defaultServices; servicePreviews: ReturnType<typeof mergeServicePreviews>;
   heroTitle: string; heroHighlight: string; heroIntroduction: string;
   aboutIntroduction: string; heroImage: CmsImage | null; aboutImage: CmsImage | null;
 };
 export const getWebsite = cache(async (): Promise<WebsiteContent> => {
-  const doc = await read(`*[_type == "websiteContent" && _id == "websiteContent"][0]{heroTitle, heroHighlight, heroIntroduction, aboutIntroduction, contact, services, "heroImage": heroImage${imageProjection}, "aboutImage": aboutImage${imageProjection}}`);
+  const doc = await read(`*[_type == "websiteContent" && _id == "websiteContent"][0]{heroTitle, heroHighlight, heroIntroduction, aboutIntroduction, contact, "services": services[]{id, title, short, description, roles, "image": image${imageProjection}}, "servicePreviews": servicePreviews[]{key, title, short, "image": image${imageProjection}}, "heroImage": heroImage${imageProjection}, "aboutImage": aboutImage${imageProjection}}`);
   const contact = doc?.contact || {};
   const phone = typeof contact.phone === "string" && /^\+?[\d\s()-]{7,22}$/.test(contact.phone)
     ? contact.phone : defaults.phone;
@@ -29,16 +31,9 @@ export const getWebsite = cache(async (): Promise<WebsiteContent> => {
     whatsappNumber: digits,
     whatsappConfirmed: typeof contact.whatsappConfirmed === "boolean" ? contact.whatsappConfirmed : defaults.whatsappConfirmed,
   };
-  const services = defaultServices.map((service) => {
-    const edited = Array.isArray(doc?.services) ? doc.services.find((item: any) => item.id === service.id) : null;
-    return { ...service,
-      short: edited?.short?.trim() || service.short,
-      description: edited?.description?.trim() || service.description,
-      roles: Array.isArray(edited?.roles) && edited.roles.length ? edited.roles.filter((role: unknown) => typeof role === "string") as string[] : service.roles,
-    };
-  });
+  const services = mergeServices(defaultServices, doc?.services);
   return {
-    company, services,
+    company, services, servicePreviews: mergeServicePreviews(defaultPreviews, services, doc?.servicePreviews),
     heroTitle: doc?.heroTitle?.trim() || "The Right Crew",
     heroHighlight: doc?.heroHighlight?.trim() || "for Every Event.",
     heroIntroduction: doc?.heroIntroduction?.trim() || "Event staff, entertainers and film crews for your next big moment in Kerala.",

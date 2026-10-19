@@ -11,7 +11,18 @@ export const metadata: Metadata = {
  ...(siteUrl ? {metadataBase:new URL(siteUrl)} : {}),
  title:{default:"CrewVerse Kerala | Event Staff, Entertainment & Film Crews",template:"%s | CrewVerse"},
  description:"Event staff, performers and film production crews for events and businesses in Kerala. Discuss your requirements with CrewVerse.",
- icons:{icon:"/favicon.svg"},
+ icons:{
+  icon:[
+   {url:"/favicon.ico",sizes:"16x16 32x32 48x48 64x64 96x96 128x128 256x256",type:"image/x-icon"},
+   {url:"/favicon-32x32.png",sizes:"32x32",type:"image/png"},
+   {url:"/favicon-48x48.png",sizes:"48x48",type:"image/png"},
+   {url:"/favicon-96x96.png",sizes:"96x96",type:"image/png"},
+   {url:"/favicon-192x192.png",sizes:"192x192",type:"image/png"},
+   {url:"/favicon-512x512.png",sizes:"512x512",type:"image/png"},
+  ],
+  shortcut:"/favicon.ico",
+  apple:[{url:"/apple-touch-icon.png",sizes:"180x180",type:"image/png"}],
+ },
  robots:{index:!!siteUrl,follow:true,googleBot:{index:!!siteUrl,follow:true,"max-image-preview":"large"}},
  openGraph:{type:"website",siteName:"CrewVerse",locale:"en_IN"},
 };

@@ -1,0 +1,12 @@
+[
+  {"key":"singers-rappers-dancers","title":"Singers, Rappers & Dancers","groupId":"entertainment","image":"/images/performer.webp","icon":"mic"},
+  {"key":"photography-videography","title":"Photography & Videography","groupId":"entertainment","image":"/images/film.webp","icon":"camera"},
+  {"key":"event-support","title":"Event Support Staff","groupId":"event-staffing","image":"/images/event.webp","icon":"users"},
+  {"key":"bartenders-food-service","title":"Bartenders & Food Service","groupId":"event-staffing","image":"/images/event.webp","icon":"martini"},
+  {"key":"promoters-brand-activations","title":"Promoters & Brand Activations","groupId":"event-staffing","image":"/images/crew.webp","icon":"megaphone"},
+  {"key":"emcees-hostesses","title":"Emcees & Hostesses","groupId":"entertainment","image":"/images/crew.webp","icon":"audio"},
+  {"key":"bouncers-security","title":"Bouncers & Security","groupId":"event-staffing","image":"/images/event.webp","icon":"shield"},
+  {"key":"cultural-artists","title":"Cultural Artists","groupId":"culture-workforce","image":"/images/culture.webp","icon":"sparkles"},
+  {"key":"film-production-crew","title":"Film & Production Crew","groupId":"film-production","image":"/images/film.webp","icon":"clapperboard"},
+  {"key":"skilled-labour-setup","title":"Skilled Labour & Setup","groupId":"culture-workforce","image":"/images/event.webp","icon":"hardhat"}
+]

@@ -2446,3 +2446,32 @@ button {
  .main-nav, .main-nav.is-open { transform: none; }
  .step-rule::after { display: none; }
 }
+
+/* Touch equivalents: preserve resting layouts; no hover or magnetic pointer needed. */
+@keyframes crew-mobile-reveal {
+ from { opacity: .2; transform: translateY(24px); }
+ to { opacity: 1; transform: translateY(0); }
+}
+.motion-fallback-reveal { animation: crew-mobile-reveal .65s var(--motion-ease) both; }
+@media (max-width: 768px) {
+ .main-nav .nav-indicator { display: block; bottom: 0; }
+ .main-nav > a:not(.button) { overflow: hidden; }
+ .main-nav.is-open > a { animation: menu-in .35s var(--motion-ease) both; }
+ .main-nav.is-open > a:nth-child(2) { animation-delay: .035s; }
+ .main-nav.is-open > a:nth-child(3) { animation-delay: .07s; }
+ .main-nav.is-open > a:nth-child(4) { animation-delay: .105s; }
+ .main-nav.is-open > a:nth-child(5) { animation-delay: .14s; }
+ .main-nav.is-open > a:nth-child(6) { animation-delay: .16s; }
+}
+@media (hover: none), (pointer: coarse) {
+ .reference-service-card:active { border-color: var(--yellow); }
+ .reference-service-card:active > img, .event-cover:active img { transform: scale(1.035); }
+ .reference-service-card:active .card-corner, .button:active svg, .text-link:active svg { transform: translate(2px,-2px); }
+ .event-card:active { border-color: var(--yellow); }
+ .menu-trigger:active { transform: scale(.96); }
+}
+@media (prefers-reduced-motion: reduce) {
+ .motion-fallback-reveal, .main-nav.is-open > a { animation: none; }
+ .reference-service-card:active > img, .event-cover:active img, .menu-trigger:active,
+ .reference-service-card:active .card-corner, .button:active svg, .text-link:active svg { transform: none; }
+}

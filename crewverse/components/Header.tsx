@@ -31,7 +31,7 @@ export default function Header() {
   useEffect(() => {
     if (path !== "/") return;
     const contact = document.getElementById("contact");
-    if (!contact) return;
+    if (!contact || !window.IntersectionObserver) return;
     const observer = new IntersectionObserver(([entry]) => setContactActive(entry.isIntersecting), {rootMargin: "-82px 0px -25% 0px"});
     observer.observe(contact);
     return () => observer.disconnect();
@@ -77,9 +77,9 @@ export default function Header() {
               key={href}
               href={href === "/contact" && path === "/" ? "#contact" : href === "/" ? "/" : `${href}/`}
               aria-current={active === href ? (path === "/" && href === "/contact" ? "location" : "page") : undefined}
-              onMouseEnter={() => setHovered(href)}
+              onPointerEnter={(event) => {if (event.pointerType === "mouse") setHovered(href);}}
               onFocus={() => setHovered(href)}
-              onClick={() => setOpen(false)}
+              onClick={() => {setOpen(false); setHovered(null);}}
             >
               {label}
               {(hovered || active) === href && <motion.span className="nav-indicator" layoutId="navbar-indicator" initial={false} transition={reduced ? {duration: 0} : {type: "tween", duration: .28, ease: [.22, 1, .36, 1]}} />}
